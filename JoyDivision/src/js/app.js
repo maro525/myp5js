@@ -22,17 +22,24 @@ const sketch = p => {
     }
 
     p.draw = function() {
-        for(var i=2; i < lines.length; i++) {
+
+        for(var i=5; i < lines.length; i++) {
             // p.noFill();
             p.fill(255);
             p.beginShape();
+            p.vertex(lines[i][0].x, lines[i][0].y);
             for(var j=0; j < lines[i].length-2; j++) {
                 var xc = (lines[i][j].x+lines[i][j+1].x)/2;
                 var yc = (lines[i][j].y+lines[i][j+1].y)/2;
-                p.vertex(lines[i][j].x, lines[i][j].y);
-                p.quadraticVertex(xc,yc, lines[i][j+1].x, lines[i][j+1].y);
+                // p.vertex(lines[i][j].x, lines[i][j].y);
+                // p.stroke(255,0,0);
+                // p.ellipse(lines[i][j].x, lines[i][j].y, 3, 3);
+                // p.stroke(0, 255, 0);
+                // p.ellipse(xc, yc, 3, 3);
+                p.stroke(0);
+                p.quadraticVertex(lines[i][j].x, lines[i][j].y, xc,yc);
             }
-            p.quadraticVertex(lines[i][j].x, lines[i][j].y, lines[i][j+1].x, lines[i][j+1].y);
+            // p.quadraticVertex(lines[i][j+1].x, lines[i][j+1].y, lines[i][j].x, lines[i][j].y);
             p.endShape();
         }
     }
@@ -44,7 +51,7 @@ const sketch = p => {
             for(var j = step; j <= size-step; j += step) {
                 var distanceToCenter = Math.abs(j - size/2);
                 var variance = Math.max(size/2-50-distanceToCenter, 0);
-                var random = Math.random() * variance / 2 * -1;
+                var random = Math.random() * variance/3 * -1;
                 var point = {x: j, y: i+random};
                 line.push(point);
             }
@@ -53,7 +60,7 @@ const sketch = p => {
     }
 
     p.mousePressed = function() {
-        if (value == 0) {
+        if (p.keyCode == 48) {
             p.save('canvas.png');
         }
     }
