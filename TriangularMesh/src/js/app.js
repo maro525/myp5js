@@ -9,7 +9,8 @@ const sketch = p => {
         gap;
 
     p.preload = function(){
-        size = Math.min(p.windowHeight, p.windowWidth);
+        // size = Math.min(p.windowHeight, p.windowWidth);
+        size = 500;
     }
 
     p.setup = function() {
@@ -20,13 +21,13 @@ const sketch = p => {
 
         gap = size/12;
 
-        var ratio = 0.8;
-        p.scale(0.8);
+        var ratio = 0.9;
+        p.scale(ratio);
         p.translate(size*(1-ratio)/2, size*(1-ratio)/2);
 
         p.setupdot();
         p.drawlines();
-        p.drawout();
+        // p.drawout();
     }
 
     p.draw = function() {
